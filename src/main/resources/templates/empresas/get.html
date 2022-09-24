@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de gestión de empresas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        table a{
+        color:white;
+        }
+        a:hover {
+        color: black;
+        text-decoration:none;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Sistema de gestión de empleados</h1>
+    <a th:href="@{/}">Home</a>
+    <br>
+    <a th:href="@{/empresa/crear}">Nueva Empresa</a>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>NIT</th>
+            <th>Telefono</th>
+            <th>Dirección</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr th:each="empresa : ${empresas}">
+            <td th:text="${empresa.nombreEmpresa}"></td>
+            <td th:text="${empresa.documentoEmpresa}"></td>
+            <td th:text="${empresa.telefonoEmpresa}"></td>
+            <td th:text="${empresa.direccionEmpresa}"></td>
+            <td><button type="button" class="btn btn-warning"><a th:href="@{/update/}+${empresa.idEmpresa}">Editar</a></button></td>
+            <td><button type="button" class="btn btn-danger"><a th:href="@{/delete/}+${empresa.idEmpresa}">Eliminar</a></button></td>
+        </tr>
+    </table>
+</body>
+</html>

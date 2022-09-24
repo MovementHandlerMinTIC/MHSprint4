@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Menu</h1>
+    <p th:text="${mensaje}"> lista </p>
+    <a th:href="@{/VerEmpleados}">Sistema de gestión de empleado</a>
+    <br>
+    <a>Sistema de gestión de ingresos y gastos</a>
+    <br>
+    <a th:href="@{/empresa/findall}">Sistema de gestión de empresas</a>
+    <br>
+</body>
+</html>
