@@ -22,7 +22,7 @@ public class MovimientodeDinero {
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
-    @Column(name = "fecha_creacion", nullable   = false)
+    @Column(name = "fecha_creacion")
     private LocalDate createdAt;
     @Column(name = "fecha_actualizacion")
     private LocalDate updatedAt;

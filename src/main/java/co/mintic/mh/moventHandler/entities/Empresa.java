@@ -26,7 +26,7 @@ public class Empresa {
     private String direccionEmpresa;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "fecha_creacion", nullable = false)
+    @Column(name = "fecha_creacion")
     private LocalDate createdAt;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

@@ -12,7 +12,7 @@ public interface IMovimientodeDineroService {
     Optional<MovimientodeDinero> findById(long id);
     List<MovimientodeDinero> findAll();
     List<MovimientodeDinero> findByempresa(Empresa idEmpresa);
-    MovimientodeDinero createMovimientodeDinero(MovimientodeDinero movimientodeDinero);
-    MovimientodeDinero updateMovimientodeDinero(long id, MovimientodeDinero movimientodeDinero);
-    void deleteMovimientodeDinero(long id);
+    Boolean createMovimientodeDinero(MovimientodeDinero movimientodeDinero);
+    Boolean updateMovimientodeDinero(MovimientodeDinero movimientodeDinero);
+    Boolean deleteMovimientodeDinero(long id);
 }

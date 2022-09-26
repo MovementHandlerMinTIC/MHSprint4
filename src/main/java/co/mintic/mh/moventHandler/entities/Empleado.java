@@ -1,5 +1,7 @@
 package co.mintic.mh.moventHandler.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -16,24 +18,27 @@ public class Empleado {
     @Column(name = "correo_empleado", nullable = false)
     private String correoEmpleado;
     @Column(name = "rol_empleado", nullable = false)
-    private Enum_Roles rolEmpleado;
+    private int rolEmpleado;
     @ManyToOne
     @JoinColumn(name = "id_Empresa")
     private  Empresa empresaEmpleado;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "fecha_actualizacion")
     private LocalDate updatedAt;
-    @Column(name = "fecha_creacion", nullable = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "fecha_creacion")
     private LocalDate createdAt;
-    public Empleado(long idEmpleado, String correoEmpleado, Enum_Roles rolEmpleado, Empresa empresaEmpleado, LocalDate updatedAt, LocalDate createdAt, String nombreEmpleado) {
+
+    public Empleado(long idEmpleado, String nombreEmpleado, String correoEmpleado, int rolEmpleado, Empresa empresaEmpleado, LocalDate updatedAt, LocalDate createdAt) {
         this.idEmpleado = idEmpleado;
+        this.nombreEmpleado = nombreEmpleado;
         this.correoEmpleado = correoEmpleado;
         this.rolEmpleado = rolEmpleado;
         this.empresaEmpleado = empresaEmpleado;
         this.updatedAt = updatedAt;
         this.createdAt = createdAt;
-        this.nombreEmpleado = nombreEmpleado;
-
     }
+
     public Empleado() {
     }
 
@@ -61,12 +66,11 @@ public class Empleado {
         this.correoEmpleado = correoEmpleado;
     }
 
-
-    public Enum_Roles getRolEmpleado() {
+    public int getRolEmpleado() {
         return rolEmpleado;
     }
 
-    public void setRolEmpleado(Enum_Roles rolEmpleado) {
+    public void setRolEmpleado(int rolEmpleado) {
         this.rolEmpleado = rolEmpleado;
     }
 
@@ -77,7 +81,6 @@ public class Empleado {
     public void setEmpresaEmpleado(Empresa empresaEmpleado) {
         this.empresaEmpleado = empresaEmpleado;
     }
-
 
     public LocalDate getUpdatedAt() {
         return updatedAt;
@@ -93,18 +96,5 @@ public class Empleado {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Empleado{" +
-                "idEmpleado=" + idEmpleado +
-                ", correoEmpleado='" + correoEmpleado + '\'' +
-                ", rolEmpleado=" + rolEmpleado +
-                ", empresaEmpleado=" + empresaEmpleado +
-                ", updatedAt=" + updatedAt +
-                ", createdAt=" + createdAt +
-                ", nombreEmpleado='" + nombreEmpleado + '\'' +
-                '}';
     }
 }

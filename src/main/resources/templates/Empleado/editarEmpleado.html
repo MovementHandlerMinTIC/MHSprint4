@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Agregar nuevo Empleado </title>
+    <title>Editar  Empleado </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -20,20 +20,28 @@
 <body>
 
 <div class="container">
-    <h1> Agregue aqui los datos del Empleado</h1>
+    <h1> Cambie aqui los datos del Empleado</h1>
     <br>
     <!--Crear formulario para llenar los datos del empleado  y guardarlo en el objeto empl -->
-    <form th:action="@{/GuardarEmpleado}" th:object="${empl}" method="post">
+    <form th:action="@{/ActualizarEmpleado}" th:object="${empl}" method="post">
+
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="idEmpleado">ID del empleado:</label>
+                <div class="col-md-6">
+                    <input type ="text" th:field="*{idEmpleado}" class="form-control" id="idEmpleado" required="required" readonly></div>
+            </div>
+        </div>
 
         <!--Campo para nombre-->
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="nombreEmpleado">Nombre del Empleado:</label>
                 <div class="col-md-6">
-                    <input type="text" th:field="*{nombreEmpleado}" class="form-control" id="nombreEmpleado" required="required"></div>
+                    <input type ="text" th:field="*{nombreEmpleado}" class="form-control" id="nombreEmpleado" required="required"></div>
             </div>
         </div>
-
         <!--Campo para correo-->
         <div class="row">
             <div class="form-group col-md-12">
@@ -48,24 +56,31 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="empresaEmpleado">Empresa a la que pertenece:</label>
                 <div class="col-md-6">
-                    <input type="text" th:field="*{empresaEmpleado}" class="form-control" id="empresaEmpleado" required="required"></div>
+                    <input type="text" th:field="*{empresaEmpleado}" class="form-control" id="empresaEmpleado" required="required">
+                </div>
             </div>
         </div>
-
         <!--Campo para Rol-->
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="rolEmpleado">Rol del Empleado:</label>
                 <div class="col-md-6">
-                    <input type="text" th:field="*{rolEmpleado}" class="form-control" id="rolEmpleado" required="required"></div>
+                    <select th:field="*{rolEmpleado}" class="form-control" id="rolEmpleado" required="required">
+                        <option th:value= '1'>Admin</option>
+                        <option th:value= '2'>Operativo</option>
+                    </select>
+                </div>
             </div>
         </div>
+
+        <input type="hidden" name="createdAt"  id="createdAt" th:field="*{createdAt}">
+        <input type="hidden" name="updatedAt"  id="updatedAt" th:field="*{updatedAt}">
 
 
         <!--Boton para enviar todo y ejecutar accion -->
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-success">Registrar Empleado</button>
+                <button class="btn btn-success">Actualizar Empleado</button>
             </div>
         </div>
 
@@ -75,5 +90,17 @@
     <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
 
 </div>
+
+    <script>
+            date = new Date()
+            imput= document.getElementById("createdAt")
+             if(imput.value==''){
+                    date = new Date();
+                    imput.value = Intl.DateTimeFormat('en-Ca').format(date);
+                 }
+            imput2= document.getElementById("updatedAt")
+            imput2.value = Intl.DateTimeFormat('en-Ca').format(date);
+
+    </script>
 </body>
 </html>

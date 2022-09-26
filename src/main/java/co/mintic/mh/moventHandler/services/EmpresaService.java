@@ -30,20 +30,32 @@ public class EmpresaService implements IEmpresaService{
     }
 
     @Override
-    public Empresa createEmpresa(Empresa empresa) {
-        Empresa newEmpresa = empresaRepository.save(empresa);
-        return newEmpresa;
+    public Boolean createEmpresa(Empresa empresa) {
+        Empresa emp = empresaRepository.save(empresa);
+        if(empresaRepository.findById(emp.getIdEmpresa())!=null){
+        empresaRepository.save(emp);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public Empresa updateEmpresa(long id, Empresa empresa) {
-        Empresa putEmpresa = empresaRepository.save(empresa);
-        return putEmpresa;
+    public Boolean updateEmpresa( Empresa empresa) {
+        Empresa emp = empresaRepository.save(empresa);
+        if (empresaRepository.findById(emp.getIdEmpresa()) != null) {
+            empresaRepository.save(emp);
+            return true;
+        }
+        return false;
     }
-
     @Override
-    public void deleteEmpresa(long id) {
+    public Boolean deleteEmpresa(long id) {
         empresaRepository.deleteById(id);
+        if(this.empresaRepository.findById(id).isPresent()){
+            return false;
+        }
+        return true;
     }
+
 
 }

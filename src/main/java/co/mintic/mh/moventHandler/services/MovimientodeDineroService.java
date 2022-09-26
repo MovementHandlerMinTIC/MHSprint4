@@ -7,6 +7,7 @@ import co.mintic.mh.moventHandler.entities.MovimientodeDinero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,24 +33,35 @@ public class MovimientodeDineroService implements IMovimientodeDineroService{
 
     @Override
     public List<MovimientodeDinero> findByempresa(Empresa idEmpresa) {
-        List<MovimientodeDinero> movimientodeDinero = movimientodeDineroRepository.findByempresa(idEmpresa);
-        return movimientodeDinero;
+        return null;
+    }
+
+
+    @Override
+    public Boolean createMovimientodeDinero(MovimientodeDinero movimiento) {
+        MovimientodeDinero mov = movimientodeDineroRepository.save(movimiento);
+        if (movimientodeDineroRepository.findById(mov.getIdTransaccion()) != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public MovimientodeDinero createMovimientodeDinero(MovimientodeDinero movimientodeDinero) {
-        MovimientodeDinero newMovimientodeDinero = movimientodeDineroRepository.save(movimientodeDinero);
-        return newMovimientodeDinero;
+    public Boolean updateMovimientodeDinero(MovimientodeDinero movimiento){
+        MovimientodeDinero mov = movimientodeDineroRepository.save(movimiento);
+        if (movimientodeDineroRepository.findById(mov.getIdTransaccion()) != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public MovimientodeDinero updateMovimientodeDinero(long id, MovimientodeDinero movimientodeDinero) {
-        MovimientodeDinero putMovimientodeDinero = movimientodeDineroRepository.save(movimientodeDinero);
-        return putMovimientodeDinero;
-    }
-
-    @Override
-    public void deleteMovimientodeDinero(long id) {
+    public Boolean deleteMovimientodeDinero(long id) {
         movimientodeDineroRepository.deleteById(id);
+        if(this.movimientodeDineroRepository.findById(id).isPresent()){
+            return false;
+        }
+        return true;
     }
+
 }

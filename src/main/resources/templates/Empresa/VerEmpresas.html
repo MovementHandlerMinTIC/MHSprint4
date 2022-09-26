@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lista de Empleados </title>
+    <title>Lista de Empresas </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -20,35 +20,38 @@
 </style>
 </head>
 <body>
+
 <div class="container">
-    <h1> Lista de Empleados</h1>
+    <h1> Lista de Empresas</h1>
+    <button type="button" class="btn btn-info"><a th:href="@{/}">Inicio</a></button>
+    <br>
     <!--Dibujamos la tabla-->
     <br><table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Nombre</th>
-        <th>Correo</th>
-        <th>Empresa</th>
-        <th>Rol</th>
+        <th>Dirección</th>
+        <th>Telefono</th>
+        <th>NIT</th>
         <th>Editar</th>
         <th>Eliminar</th>
     </tr>
 
     <!--Llenamos la tabla dibujada-->
-    <!--En nuestro controller, creamos en viewEmpleado un modelo con un atributo llamado empleist donde esta guardada la lista de todas las empresas-->
-    <tr th:each="empleado : ${emplelist}">
-        <td th:text="${empleado.idEmpleado}"></td>
-        <td th:text="${empleado.nombreEmpleado}"></td>
-        <td th:text="${empleado.correoEmpleado}"></td>
-        <td th:text="${empleado.empresaEmpleado.nombreEmpresa}"></td>
-        <td th:text="${empleado.rolEmpleado}"></td>
-        <td><button type="button" class="btn btn-warning"><a th:href="@{/EditarEmpleado/{idEmpleado}(idEmpleado=${empleado.idEmpleado})}">Editar</a></button></td>
-        <td><button type="button" class="btn btn-danger"><a th:href="@{/EliminarEmpleado/{idEmpleado}(idEmpleado=${empleado.idEmpleado})}">Eliminar</a></button></td>
+    <!--En nuestro controller, creamos en viewEmpresa un modelo con un atributo llamado emplist donde esta guardada la lista de todas las empresas-->
+    <tr th:each="empresa : ${emprelis}">
+        <td th:text="${empresa.idEmpresa}"></td>
+        <td th:text="${empresa.nombreEmpresa}"></td>
+        <td th:text="${empresa.direccionEmpresa}"></td>
+        <td th:text="${empresa.telefonoEmpresa}"></td>
+        <td th:text="${empresa.documentoEmpresa}"></td>
+        <td><button type="button" class="btn btn-warning"><a th:href="@{/EditarEmpresa/{id}(id=${empresa.idEmpresa})}">Editar</a></button></td>
+        <td><button type="button" class="btn btn-danger"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.idEmpresa})}">Eliminar</a></button></td>
     </tr>
 </table>
 
-    <!-- vamos a crear un boton que sirva para agregar nuevos empleados -->
-    <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpleado}">Agregar Nuevo Empleado</a></button>
+    <!-- vamos a crear un boton que sirva para agregar nuevas empresas -->
+    <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a></button>
 
 </div>
 
@@ -57,16 +60,16 @@
 
         var msg= [[${mensaje}]];
         if (msg == "saveOK"){
-            Command : toastr["success"]("Empleado Registrado Con Exito!")
+            Command : toastr["success"]("Empresa creada con éxito!")
             }
         else if (msg == "updateOK"){
-            Command : toastr["success"]("Empleado Actualizado con éxito!")
+            Command : toastr["success"]("Empresa actualizada con éxito!")
         }
         else if (msg == "deleteOK"){
-            Command : toastr["error"]("Registro De Empleado  Eliminado con éxito!")
+            Command : toastr["error"]("Empresa eliminada con éxito!")
         }
         else if (msg == "deleteError"){
-            Command : toastr["error"]("Registro De Empleado no ha sido eliminado!")
+            Command : toastr["error"]("Empresa no ha sido eliminada!")
         }
         toastr.options={
             "positionClass": "toast-top-right",
@@ -74,7 +77,10 @@
             "showMethod":"fadeIn",
             "hideMethod":"fadeOut",
         }
+
+
     }
+
 </script>
 
 </body>
