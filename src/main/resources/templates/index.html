@@ -7,7 +7,46 @@
     <title>Home</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+         /* Sidebar */
+        .sidebar {
+          position: relative;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          padding: 10px 0 0; /* Height of navbar */
+          box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+          width: 300px;
+          z-index: 600;
+          height: 100vh;
 
+        }
+
+        .sidebar .active {
+          border-radius: 5px;
+          box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+        }
+
+        .sidebar-sticky {
+          position: fixed;
+          top: 0;
+          height: calc(100vh - 48px);
+          padding-top: 0.5rem;
+          overflow-x: hidden;
+          overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        }
+
+        .d-flex{
+            display:grid;
+            grid-template-columns:25% 75%;
+            justify-content:start;
+
+        }
+
+        .d-flex > div{
+            justify-self:start;
+        }
+    </style>
 
 </head>
 <body>
