@@ -29,30 +29,49 @@ public class EmpleadoService implements IEmpleadoService {
 
     @Override
     public Boolean createEmpleado(Empleado empl) {
-        Empleado emp = empleadoRepository.save(empl);
-        if (empleadoRepository.findById(emp.getIdEmpleado()) != null) {
-            empleadoRepository.save(emp);
-            return true;
+        try {
+            Empleado emp = empleadoRepository.save(empl);
+        } catch (Exception err) {
+            System.out.println("Hay un error" + " " + err);
+        } finally {
+            if (empleadoRepository.findById(empl.getIdEmpleado()) != null) {
+                empleadoRepository.save(empl);
+                return true;
+            }
+            return false;
         }
-        return false;
+
+
     }
 
     @Override
     public Boolean updateEmpleado(Empleado empl) {
-        Empleado emp =empleadoRepository.save(empl);
-        if(empleadoRepository.findById(emp.getIdEmpleado())!=null){
-        empleadoRepository.save(emp);
-        return true;
+        try {
+            Empleado emp =empleadoRepository.save(empl);
+        }  catch (Exception err) {
+        System.out.println("Hay un error" + " " + err);
+        } finally {
+            if(empleadoRepository.findById(empl.getIdEmpleado())!=null){
+                empleadoRepository.save(empl);
+                return true;
+            }
+            else return false;
         }
-        return false;
+
+
     }
 
     @Override
     public Boolean deleteEmpleado(long id) {
-    empleadoRepository.deleteById(id);
-    if(this.empleadoRepository.findById(id).isPresent()){
-       return false;
-    }
-    return true;
+
+        try {
+            empleadoRepository.deleteById(id);
+        } catch (Exception err) {
+            System.out.println("Hay un error" + " " + err);
+        } finally {
+            if (this.empleadoRepository.findById(id).isPresent()) {
+                return false;
+            } else return true;
+        }
     }
 }

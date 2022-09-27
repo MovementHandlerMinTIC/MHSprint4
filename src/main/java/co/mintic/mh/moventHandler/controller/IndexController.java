@@ -13,6 +13,14 @@ public class IndexController {
     private final Logger LOG = Logger.getLogger(""+IndexController.class);
 
     @GetMapping("/")
+    public String login(Model model){
+        LOG.log(Level.INFO,"index");
+        var mensaje = "Bienvenidos al sistema de gestión de ingresos y egresos ";
+        model.addAttribute("mensaje", mensaje);
+        return "login";
+    }
+
+    @GetMapping("/index")
     public String index(Model model){
         LOG.log(Level.INFO,"index");
         var mensaje = "Bienvenidos al sistema de gestión de ingresos y egresos ";

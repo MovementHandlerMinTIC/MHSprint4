@@ -1,6 +1,8 @@
 package co.mintic.mh.moventHandler.entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -21,9 +23,10 @@ public class MovimientodeDinero {
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "fecha_creacion")
     private LocalDate createdAt;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "fecha_actualizacion")
     private LocalDate updatedAt;
 

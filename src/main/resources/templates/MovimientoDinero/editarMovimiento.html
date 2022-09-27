@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Editar  Empleado </title>
+    <title>Editar Movimiento </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -20,45 +20,46 @@
 <body>
 
 <div class="container">
-    <h1> Cambie aqui los datos del Empleado</h1>
+    <h1> Edite aquí los datos de la Transacción</h1>
     <br>
-    <!--Crear formulario para llenar los datos del empleado  y guardarlo en el objeto empl -->
-    <form th:action="@{/ActualizarEmpleado}" th:object="${empl}" method="post">
+    <!--Crear formulario para llenar los datos del movimiento y guardarlo en el objeto emp -->
+    <form th:action="@{/GuardarMovimiento}" th:object="${mov}" method="post">
 
-
+        <!--Campo para id-->
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="idEmpleado">ID del empleado:</label>
+                <label class="col-md-3" for="idTransaccion">ID de la Transacción:</label>
                 <div class="col-md-6">
-                    <input type ="text" th:field="*{idEmpleado}" class="form-control" id="idEmpleado" required="required" readonly></div>
+                    <input type="text" th:field="*{idTransaccion}" class="form-control" id="idTransaccion" required="required" readonly></div>
             </div>
         </div>
 
-        <!--Campo para nombre-->
+        <!--Campo para conceptox-->
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="nombreEmpleado">Nombre del Empleado:</label>
+                <label class="col-md-3" for="conceptoTransaccion">Concepto:</label>
                 <div class="col-md-6">
-                    <input type ="text" th:field="*{nombreEmpleado}" class="form-control" id="nombreEmpleado" required="required"></div>
-            </div>
-        </div>
-        <!--Campo para correo-->
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3" for="correoEmpleado">Correo del Empleado:</label>
-                <div class="col-md-6">
-                    <input type="email" th:field="*{correoEmpleado}" class="form-control" id="correoEmpleado" required="required"></div>
+                    <input type="text" th:field="*{conceptoTransaccion}" class="form-control" id="conceptoTransaccion" required="required"></div>
             </div>
         </div>
 
-        <!--Campo para Empresa-->
+        <!--Campo para monto-->
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="empresaEmpleado">Empresa a la que pertenece:</label>
+                <label class="col-md-3" for="montoTransaccion">Monto:</label>
                 <div class="col-md-6">
-                    <select th:field="*{empresaEmpleado.idEmpresa}" name="empresaEmpleado" class="form-control" id="empresaEmpleado">
+                    <input type="number" th:field="*{montoTransaccion}" class="form-control" id="montoTransaccion" required="required"></div>
+            </div>
+        </div>
+
+        <!--Campo para empresa-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="empresas">Empresa:</label>
+                <div class="col-md-6">
+                    <select th:field="*{empresa.idEmpresa}" name="empresas" class="form-control" id="empresas">
                         <option  value="0" selected>Seleccione Empresa</option>
-                        <option th:each="empresa : ${emprelist}"
+                        <option th:each="empresa : ${empresas}"
                                 th:value="${empresa.idEmpresa}"
                                 th:text="${empresa.nombreEmpresa}">
                         </option>
@@ -66,16 +67,17 @@
                 </div>
             </div>
         </div>
-        <!--Campo para Rol-->
+
+        <!--Campo para empleado-->
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="rolEmpleado">Rol del Empleado:</label>
+                <label class="col-md-3" for="Empleado">Empleado:</label>
                 <div class="col-md-6">
-                    <select th:field="*{rolEmpleado}" name="rolEmpleado" id="rolEmpleado" class="form-control">
-                        <option  value="0" selected>Seleccione el rol</option>
-                        <option th:each="rol : ${T(co.mintic.mh.moventHandler.entities.Enum_Roles).values()}"
-                                th:value="${rol}"
-                                th:text="${rol}">
+                    <select th:field="*{empleado.idEmpleado}" name="empleado" class="form-control" id="Empleado">
+                        <option  value="0" selected>Seleccione Empleado</option>
+                        <option th:each="empleado : ${emplelist}"
+                                th:value="${empleado.idEmpleado}"
+                                th:text="${empleado.nombreEmpleado}">
                         </option>
                     </select>
                 </div>
@@ -86,12 +88,14 @@
         <input type="hidden" name="updatedAt"  id="updatedAt" th:field="*{updatedAt}">
 
 
+
         <!--Boton para enviar todo y ejecutar accion -->
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-success">Actualizar Empleado</button>
+                <button class="btn btn-success">Agregar Movimiento</button>
             </div>
         </div>
+
 
     </form>
 
@@ -99,7 +103,6 @@
     <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
 
 </div>
-
     <script>
             date = new Date()
             imput= document.getElementById("createdAt")
@@ -111,5 +114,6 @@
             imput2.value = Intl.DateTimeFormat('en-Ca').format(date);
 
     </script>
+
 </body>
 </html>

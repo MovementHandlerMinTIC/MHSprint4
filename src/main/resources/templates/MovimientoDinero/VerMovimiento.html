@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lista de Empresas </title>
+    <title>Lista de Movimientos </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -68,7 +68,7 @@
                 <a th:href="@{/VerEmpleados}"  class="list-group-item list-group-item-action py-2 ripple">
                     <span>Sistema de gestión de empleado</span>
                 </a>
-                <a th:href="@{/VerMovimientos}" class="list-group-item list-group-item-action py-2 ripple">
+                <a th:href="@{/VerMovimientos}"  class="list-group-item list-group-item-action py-2 ripple">
                     <span>Sistema de gestión de ingresos y gastos</span>
                 </a>
                 <a th:href="@{/VerEmpresas}" class="list-group-item list-group-item-action py-2 ripple">
@@ -79,36 +79,35 @@
     </nav>
 
     <div>
-    <h1> Lista de Empresas</h1>
-
+    <h1> Lista de Movimientos</h1>
     <br>
     <!--Dibujamos la tabla-->
     <br><table class="table table-bordered">
     <tr>
         <th>ID</th>
-        <th>Nombre</th>
-        <th>Dirección</th>
-        <th>Telefono</th>
-        <th>NIT</th>
+        <th>Concepto</th>
+        <th>Monto</th>
+        <th>Empleado</th>
+        <th>Empresa</th>
         <th>Editar</th>
         <th>Eliminar</th>
     </tr>
 
     <!--Llenamos la tabla dibujada-->
     <!--En nuestro controller, creamos en viewEmpresa un modelo con un atributo llamado emplist donde esta guardada la lista de todas las empresas-->
-    <tr th:each="empresa : ${emprelis}">
-        <td th:text="${empresa.idEmpresa}"></td>
-        <td th:text="${empresa.nombreEmpresa}"></td>
-        <td th:text="${empresa.direccionEmpresa}"></td>
-        <td th:text="${empresa.telefonoEmpresa}"></td>
-        <td th:text="${empresa.documentoEmpresa}"></td>
-        <td><a class="btn btn-warning" th:href="@{/EditarEmpresa/{id}(id=${empresa.idEmpresa})}">Editar</a></td>
-        <td><a class="btn btn-danger" th:href="@{/EliminarEmpresa/{id}(id=${empresa.idEmpresa})}">Eliminar</a></td>
+    <tr th:each="movimiento : ${movlist}">
+        <td th:text="${movimiento.idTransaccion}"></td>
+        <td th:text="${movimiento.conceptoTransaccion}"></td>
+        <td th:text="${movimiento.montoTransaccion}"></td>
+        <td th:text="${movimiento.empleado.nombreEmpleado}"></td>
+        <td th:text="${movimiento.empresa.nombreEmpresa}"></td>
+        <td><a class="btn btn-warning" th:href="@{/EditarMovimiento/{id}(id=${movimiento.idTransaccion})}">Editar</a></td>
+        <td><a class="btn btn-danger" th:href="@{/EliminarMovimiento/{id}(id=${movimiento.idTransaccion})}">Eliminar</a></td>
     </tr>
 </table>
 
     <!-- vamos a crear un boton que sirva para agregar nuevas empresas -->
-    <a class="btn btn-info" th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a>
+    <a class="btn btn-info" th:href="@{/AgregarMovimiento}">Agregar Nueva Movimiento</a>
 
 </div>
 
@@ -118,16 +117,16 @@
 
         var msg= [[${mensaje}]];
         if (msg == "saveOK"){
-            Command : toastr["success"]("Empresa creada con éxito!")
+            Command : toastr["success"]("Transacción creada con éxito!")
             }
         else if (msg == "updateOK"){
-            Command : toastr["success"]("Empresa actualizada con éxito!")
+            Command : toastr["success"]("Transacción actualizada con éxito!")
         }
         else if (msg == "deleteOK"){
-            Command : toastr["success"]("Empresa eliminada con éxito!")
+            Command : toastr["success"]("Transacción eliminada con éxito!")
         }
         else if (msg == "deleteError"){
-            Command : toastr["error"]("Empresa no ha sido eliminada!")
+            Command : toastr["error"]("Transacción no ha sido eliminada!")
         }
         toastr.options={
             "positionClass": "toast-top-right",

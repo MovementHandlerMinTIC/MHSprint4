@@ -5,6 +5,7 @@ package co.mintic.mh.moventHandler.services;
 import co.mintic.mh.moventHandler.Repository.IEmpresaRepository;
 import co.mintic.mh.moventHandler.entities.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class EmpresaService implements IEmpresaService{
         return empresa.get();
     }
 
+
+
     @Override
     public List<Empresa> findAll() {
         List<Empresa> empresas = (List<Empresa>) empresaRepository.findAll();
@@ -31,30 +34,55 @@ public class EmpresaService implements IEmpresaService{
 
     @Override
     public Boolean createEmpresa(Empresa empresa) {
-        Empresa emp = empresaRepository.save(empresa);
-        if(empresaRepository.findById(emp.getIdEmpresa())!=null){
-        empresaRepository.save(emp);
-            return true;
+        try{
+            Empresa emp = empresaRepository.save(empresa);
+        } catch (Exception err){
+            System.out.println("Hay un error"+" "+err);
+        } finally {
+            if(empresaRepository.findById(empresa.getIdEmpresa())!=null){
+                empresaRepository.save(empresa);
+                return true;
+            }
+            else return false;
         }
-        return false;
+
+
     }
 
     @Override
     public Boolean updateEmpresa( Empresa empresa) {
-        Empresa emp = empresaRepository.save(empresa);
-        if (empresaRepository.findById(emp.getIdEmpresa()) != null) {
-            empresaRepository.save(emp);
-            return true;
+
+        try{
+            Empresa emp = empresaRepository.save(empresa);
+        } catch (Exception err){
+            System.out.println("Hay un error"+" "+err);
+        } finally {
+            if (empresaRepository.findById(empresa.getIdEmpresa()) != null) {
+                empresaRepository.save(empresa);
+                return true;
+            }
+            return false;
         }
-        return false;
+
+
     }
     @Override
     public Boolean deleteEmpresa(long id) {
-        empresaRepository.deleteById(id);
-        if(this.empresaRepository.findById(id).isPresent()){
-            return false;
+
+        try{
+            empresaRepository.deleteById(id);
+        } catch (Exception err){
+            System.out.println("Hay un error"+" "+err);
         }
-        return true;
+
+        finally {
+            if(this.empresaRepository.findById(id).isPresent()){
+                return false;
+            }
+           else return true;
+        }
+
+
     }
 
 

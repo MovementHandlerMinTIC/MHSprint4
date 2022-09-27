@@ -39,29 +39,43 @@ public class MovimientodeDineroService implements IMovimientodeDineroService{
 
     @Override
     public Boolean createMovimientodeDinero(MovimientodeDinero movimiento) {
-        MovimientodeDinero mov = movimientodeDineroRepository.save(movimiento);
-        if (movimientodeDineroRepository.findById(mov.getIdTransaccion()) != null) {
-            return true;
+        try {
+            MovimientodeDinero mov = movimientodeDineroRepository.save(movimiento);
+        } catch (Exception err) {
+            System.out.println("Hay un error" + " " + err);
+        }finally {
+            if (movimientodeDineroRepository.findById(movimiento.getIdTransaccion()) != null) {
+                return true;
+            }
+            else return false;
         }
-        return false;
+
     }
 
     @Override
     public Boolean updateMovimientodeDinero(MovimientodeDinero movimiento){
-        MovimientodeDinero mov = movimientodeDineroRepository.save(movimiento);
-        if (movimientodeDineroRepository.findById(mov.getIdTransaccion()) != null) {
-            return true;
+        try {
+            MovimientodeDinero mov = movimientodeDineroRepository.save(movimiento);
+        } catch (Exception err) {
+            System.out.println("Hay un error" + " " + err);
+        } finally {
+            if (movimientodeDineroRepository.findById(movimiento.getIdTransaccion()) != null) {
+                return true;
+            }
+            else return false;
         }
-        return false;
     }
 
     @Override
     public Boolean deleteMovimientodeDinero(long id) {
-        movimientodeDineroRepository.deleteById(id);
-        if(this.movimientodeDineroRepository.findById(id).isPresent()){
-            return false;
+        try {
+            movimientodeDineroRepository.deleteById(id);
+        } catch (Exception err) {
+            System.out.println("Hay un error" + " " + err);
+        } finally {
+            if (this.movimientodeDineroRepository.findById(id).isPresent()) {
+                return false;
+            } else return true;
         }
-        return true;
     }
-
 }

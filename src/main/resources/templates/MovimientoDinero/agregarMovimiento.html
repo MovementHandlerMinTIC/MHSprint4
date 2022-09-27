@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar nueva Empresa </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+    a{
+    color:white;
+    }
+    a:hover {
+    color: black;
+    text-decoration:none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1> Agregue aquí los datos de la Transacción</h1>
+    <br>
+    <!--Crear formulario para llenar los datos del movimiento y guardarlo en el objeto emp -->
+    <form th:action="@{/GuardarMovimiento}" th:object="${mov}" method="post">
+        <!--Campo para conceptox-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="conceptoTransaccion">Concepto:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{conceptoTransaccion}" class="form-control" id="conceptoTransaccion" required="required"></div>
+            </div>
+        </div>
+
+        <!--Campo para monto-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="montoTransaccion">Monto:</label>
+                <div class="col-md-6">
+                    <input type="number" th:field="*{montoTransaccion}" class="form-control" id="montoTransaccion" required="required"></div>
+            </div>
+        </div>
+
+        <!--Campo para empresa-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="empresas">Empresa:</label>
+                <div class="col-md-6">
+                <select th:field="*{empresa.idEmpresa}" name="empresas" class="form-control" id="empresas">
+                    <option  value="0" selected>Seleccione Empresa</option>
+                    <option th:each="empresa : ${empresas}"
+                            th:value="${empresa.idEmpresa}"
+                            th:text="${empresa.nombreEmpresa}">
+                    </option>
+                </select>
+                </div>
+            </div>
+        </div>
+
+        <!--Campo para empleado-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="Empleado">Empleado:</label>
+                <div class="col-md-6">
+                    <select th:field="*{empleado.idEmpleado}" name="empleado" class="form-control" id="Empleado">
+                        <option  value="0" selected>Seleccione Empleado</option>
+                        <option th:each="empleado : ${emplelist}"
+                                th:value="${empleado.idEmpleado}"
+                                th:text="${empleado.nombreEmpleado}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="createdAt"  id="createdAt" th:field="*{createdAt}">
+        <input type="hidden" name="updatedAt"  id="updatedAt" th:field="*{updatedAt}">
+
+
+
+        <!--Boton para enviar todo y ejecutar accion -->
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-success">Agregar Movimiento</button>
+            </div>
+        </div>
+
+
+    </form>
+
+    <br>
+    <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+
+</div>
+
+    <script>
+            date = new Date()
+            imput= document.getElementById("createdAt")
+             if(imput.value==''){
+                    date = new Date();
+                    imput.value = Intl.DateTimeFormat('en-Ca').format(date);
+                 }
+            imput2= document.getElementById("updatedAt")
+            imput2.value = Intl.DateTimeFormat('en-Ca').format(date);
+
+    </script>
+</body>
+</html>

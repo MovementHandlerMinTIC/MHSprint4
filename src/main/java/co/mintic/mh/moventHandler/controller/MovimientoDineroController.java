@@ -1,6 +1,7 @@
 package co.mintic.mh.moventHandler.controller;
 
 import co.mintic.mh.moventHandler.entities.Empleado;
+import co.mintic.mh.moventHandler.entities.Empresa;
 import co.mintic.mh.moventHandler.entities.MovimientodeDinero;
 import co.mintic.mh.moventHandler.services.IEmpleadoService;
 import co.mintic.mh.moventHandler.services.IEmpresaService;
@@ -35,7 +36,7 @@ public class MovimientoDineroController {
         List<MovimientodeDinero> listamovimientos = movimientoDineroService.findAll();
         model.addAttribute("movlist",listamovimientos);
         model.addAttribute("mensaje",mensaje);
-        return "verMovimientos";
+        return "MovimientoDinero/verMovimiento";
 
     }
 
@@ -46,7 +47,9 @@ public class MovimientoDineroController {
         model.addAttribute("mensaje",mensaje);
         List<Empleado> listaEmpleados = empleadoService.findAll();
         model.addAttribute("emplelist",listaEmpleados);
-        return "agregarMovimiento";
+        List<Empresa> listaEmpresa = empresaService.findAll();
+        model.addAttribute("empresas",listaEmpresa);
+        return "MovimientoDinero/agregarMovimiento";
     }
 
     @PostMapping("/GuardarMovimiento")
@@ -66,7 +69,9 @@ public class MovimientoDineroController {
         model.addAttribute("mensaje",mensaje);
         List<Empleado> listaempleados = empleadoService.findAll();
         model.addAttribute("emplelist",listaempleados);
-        return "editarMovimiento";
+        List<Empresa> listaEmpresa = empresaService.findAll();
+        model.addAttribute("empresas",listaEmpresa);
+        return "MovimientoDinero/editarMovimiento";
     }
 
 

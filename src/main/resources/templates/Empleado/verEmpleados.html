@@ -17,68 +17,132 @@
     color: black;
     text-decoration:none;
     }
+
+    /* Sidebar */
+        .sidebar {
+          position: relative;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          padding: 10px 0 0; /* Height of navbar */
+          box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+          width: 300px;
+          z-index: 600;
+          height: 100vh;
+        }
+
+        .sidebar .active {
+          border-radius: 5px;
+          box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+        }
+
+        .sidebar-sticky {
+          position: fixed;
+          top: 0;
+          height: calc(100vh - 48px);
+          padding-top: 0.5rem;
+          overflow-x: hidden;
+          overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        }
+
+        .d-flex{
+            display:grid;
+            grid-template-columns:25% 75%;
+            justify-content:start;
+
+        }
+
+        .d-flex > div{
+            justify-self:start;
+        }
+    </style>
+    <style>
+    a{
+    color:white;
+    }
+    a:hover {
+    color: black;
+    text-decoration:none;
+    }
 </style>
 </head>
+
 <body>
-<div class="container">
-    <h1> Lista de Empleados</h1>
+    <div class=" d-flex">
+        <nav id="sidebarMenu" class=" d-lg-block sidebar bg-white">
+            <div class="position-sticky">
+                <h1 class="text-center">Menu</h1>
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a th:href="@{/VerEmpleados}"  class="list-group-item list-group-item-action py-2 ripple">
+                        <span>Sistema de gestión de empleado</span>
+                    </a>
+                    <a th:href="@{/VerMovimientos}" class="list-group-item list-group-item-action py-2 ripple">
+                        <span>Sistema de gestión de ingresos y gastos</span>
+                    </a>
+                    <a th:href="@{/VerEmpresas}" class="list-group-item list-group-item-action py-2 ripple">
+                        <span>Sistema de gestión de empresas</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    <div class="container">
+        <h1> Lista de Empleados</h1>
 
-    <!--Dibujamos la tabla-->
-    <button type="button" class="btn btn-info"><a th:href="@{/}">Inicio</a></button>
-    <br>
-    <br><table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Empresa</th>
-        <th>Rol</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
-    </tr>
+        <!--Dibujamos la tabla-->
+        <br>
+        <br><table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Empresa</th>
+            <th>Rol</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
 
-    <!--Llenamos la tabla dibujada-->
-    <!--En nuestro controller, creamos en viewEmpleado un modelo con un atributo llamado empleist donde esta guardada la lista de todas las empresas-->
-    <tr th:each="empleado : ${emplelist}">
-        <td th:text="${empleado.idEmpleado}"></td>
-        <td th:text="${empleado.nombreEmpleado}"></td>
-        <td th:text="${empleado.correoEmpleado}"></td>
-        <td th:text="${empleado.empresaEmpleado.nombreEmpresa}"></td>
-        <td th:text="${empleado.rolEmpleado}"></td>
-        <td><button type="button" class="btn btn-warning"><a th:href="@{/EditarEmpleado/{id}(id=${empleado.idEmpleado})}">Editar</a></button></td>
-        <td><button type="button" class="btn btn-danger"><a th:href="@{/EliminarEmpleado/{id}(id=${empleado.idEmpleado})}">Eliminar</a></button></td>
-    </tr>
-</table>
+        <!--Llenamos la tabla dibujada-->
+        <!--En nuestro controller, creamos en viewEmpleado un modelo con un atributo llamado empleist donde esta guardada la lista de todas las empresas-->
+        <tr th:each="empleado : ${emplelist}">
+            <td th:text="${empleado.idEmpleado}"></td>
+            <td th:text="${empleado.nombreEmpleado}"></td>
+            <td th:text="${empleado.correoEmpleado}"></td>
+            <td th:text="${empleado.empresaEmpleado.nombreEmpresa}"></td>
+            <td th:text="${empleado.rolEmpleado}"></td>
+            <td><a class="btn btn-warning" th:href="@{/EditarEmpleado/{id}(id=${empleado.idEmpleado})}">Editar</a></td>
+            <td><a class="btn btn-danger" th:href="@{/EliminarEmpleado/{id}(id=${empleado.idEmpleado})}">Eliminar</a></td>
+        </tr>
+    </table>
 
-    <!-- vamos a crear un boton que sirva para agregar nuevos empleados -->
-    <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpleado}">Agregar Nuevo Empleado</a></button>
+        <!-- vamos a crear un boton que sirva para agregar nuevos empleados -->
+        <a class="btn btn-info" th:href="@{/AgregarEmpleado}">Agregar Nuevo Empleado</a>
 
-</div>
+    </div>
 
-<script th:inline="javascript">
-    window.onload=function(){
+    <script th:inline="javascript">
+        window.onload=function(){
 
-        var msg= [[${mensaje}]];
-        if (msg == "saveOK"){
-            Command : toastr["success"]("Empleado Registrado Con Exito!")
+            var msg= [[${mensaje}]];
+            if (msg == "saveOK"){
+                Command : toastr["success"]("Empleado Registrado Con Exito!")
+                }
+            else if (msg == "updateOK"){
+                Command : toastr["success"]("Empleado Actualizado con éxito!")
             }
-        else if (msg == "updateOK"){
-            Command : toastr["success"]("Empleado Actualizado con éxito!")
+            else if (msg == "deleteOK"){
+                Command : toastr["success"]("Registro De Empleado  Eliminado con éxito!")
+            }
+            else if (msg == "deleteError"){
+                Command : toastr["error"]("Registro De Empleado no ha sido eliminado!")
+            }
+            toastr.options={
+                "positionClass": "toast-top-right",
+                "showDuration":"300",
+                "showMethod":"fadeIn",
+                "hideMethod":"fadeOut",
+            }
         }
-        else if (msg == "deleteOK"){
-            Command : toastr["error"]("Registro De Empleado  Eliminado con éxito!")
-        }
-        else if (msg == "deleteError"){
-            Command : toastr["error"]("Registro De Empleado no ha sido eliminado!")
-        }
-        toastr.options={
-            "positionClass": "toast-top-right",
-            "showDuration":"300",
-            "showMethod":"fadeIn",
-            "hideMethod":"fadeOut",
-        }
-    }
-</script>
-
+    </script>
+    </div>
 </body>
 </html>
