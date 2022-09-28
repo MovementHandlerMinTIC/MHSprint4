@@ -20,7 +20,7 @@ public class Empleado {
     private String nombreEmpleado;
     @Column(name = "correo_empleado", nullable = false)
     private String correoEmpleado;
-    @Column(name = "rol_empleado", nullable = false)
+    @Column(name = "rol_empleado")
     private Enum_Roles rolEmpleado;
     @ManyToOne
     @JoinColumn(name = "id_Empresa")
