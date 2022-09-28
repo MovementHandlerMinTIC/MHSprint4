@@ -20,8 +20,8 @@
                 <a  th:href="@{/oauth2/authorization/auth0}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Login</a>
             </div>
             <div sec:authorize="isAuthenticated()">
-                <!--<h1 th:text = "Bienvenido+ +${user.email}"></h1>-->
-                <a  th:href="@{/index}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Llevame a la aplicación</a>
+                <h1 th:text = "Bienvenido+' '+${empleado.correoEmpleado}"></h1>
+                <a  th:href="@{/index/{id}(id=${empleado.idEmpleado})}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Llevame a la aplicación</a>
             </div>
 
         </div>

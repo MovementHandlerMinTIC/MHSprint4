@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -73,5 +76,35 @@ public class EmpleadoService implements IEmpleadoService {
                 return false;
             } else return true;
         }
+    }
+
+    @Override
+    public Empleado findByCorreo(String correo) {
+        return empleadoRepository.findByCorreoEmpleado(correo);
+    }
+
+    @Override
+    public Empleado getOrCreateEmpleado(Map<String, Object> EmpleadoData) {
+        String correo = (String) EmpleadoData.get("email");
+        Empleado empleado = findByCorreo(correo);
+        if (empleado == null) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDate dateNow = LocalDate.parse(dtf.format(LocalDateTime.now()), JEFormatter);
+            String name = (String) EmpleadoData.get("name");
+            String auth0Id = (String) EmpleadoData.get("sub");
+            String image = (String) EmpleadoData.get("image");
+            Empleado newEmpleado = new Empleado();
+            newEmpleado.setCorreoEmpleado(correo);
+            newEmpleado.setNombreEmpleado(name);
+            newEmpleado.setCreatedAt(dateNow);
+            newEmpleado.setUpdatedAt(dateNow);
+
+            return empleadoRepository.save(newEmpleado);
+        }
+
+        return  empleado;
+
+
     }
 }

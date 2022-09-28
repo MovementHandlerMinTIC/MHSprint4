@@ -99,8 +99,14 @@
         <td th:text="${movimiento.idTransaccion}"></td>
         <td th:text="${movimiento.conceptoTransaccion}"></td>
         <td th:text="${movimiento.montoTransaccion}"></td>
-        <td th:text="${movimiento.empleado.nombreEmpleado}"></td>
-        <td th:text="${movimiento.empresa.nombreEmpresa}"></td>
+        <div th:switch="${movimiento.empleado}">
+            <td th:case="null">Sin asignar</td>
+            <td th:case!="null" th:text="${movimiento.empleado.nombreEmpleado}"></td>
+        </div>
+        <div th:switch="${movimiento.empleado}">
+            <td th:case="null"> Sin asignar</td>
+            <td th:case!="null" th:text="${movimiento.empresa.nombreEmpresa}"></td>
+        </div>
         <td><a class="btn btn-warning" th:href="@{/EditarMovimiento/{id}(id=${movimiento.idTransaccion})}">Editar</a></td>
         <td><a class="btn btn-danger" th:href="@{/EliminarMovimiento/{id}(id=${movimiento.idTransaccion})}">Eliminar</a></td>
     </tr>

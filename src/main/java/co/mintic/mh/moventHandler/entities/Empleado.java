@@ -1,5 +1,6 @@
 package co.mintic.mh.moventHandler.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "Empleados")
-@Data @NoArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Empleado {
 
     @Id
@@ -32,15 +33,7 @@ public class Empleado {
     @Column(name = "fecha_creacion")
     private LocalDate createdAt;
 
-    public Empleado(long idEmpleado, String nombreEmpleado, String correoEmpleado, Enum_Roles rolEmpleado, Empresa empresaEmpleado, LocalDate updatedAt, LocalDate createdAt) {
-        this.idEmpleado = idEmpleado;
-        this.nombreEmpleado = nombreEmpleado;
-        this.correoEmpleado = correoEmpleado;
-        this.rolEmpleado = rolEmpleado;
-        this.empresaEmpleado = empresaEmpleado;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
-    }
+
 
 
 }

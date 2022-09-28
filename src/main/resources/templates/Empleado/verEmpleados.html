@@ -107,7 +107,12 @@
             <td th:text="${empleado.idEmpleado}"></td>
             <td th:text="${empleado.nombreEmpleado}"></td>
             <td th:text="${empleado.correoEmpleado}"></td>
-            <td th:text="${empleado.empresaEmpleado.nombreEmpresa}"></td>
+            <div th:if="${empleado.empresaEmpleado==null}">
+                <td>Sin Asignar</td>
+            </div>
+            <div th:if="${empleado.empresaEmpleado!=null}">
+                <td th:text="${empleado.empresaEmpleado.nombreEmpresa}"></td>
+            </div>
             <td th:text="${empleado.rolEmpleado}"></td>
             <td><a class="btn btn-warning" th:href="@{/EditarEmpleado/{id}(id=${empleado.idEmpleado})}">Editar</a></td>
             <td><a class="btn btn-danger" th:href="@{/EliminarEmpleado/{id}(id=${empleado.idEmpleado})}">Eliminar</a></td>
