@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Lista de Movimientos </title>
     <meta charset="utf-8">
@@ -74,6 +74,10 @@
                 <a th:href="@{/VerEmpresas/{id}(id=${usuario.idEmpleado})}" class="list-group-item list-group-item-action py-2 ripple">
                     <span>Sistema de gestión de empresas</span>
                 </a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <a  class="btn btn-primary " th:href="@{/logout}">Cerrar sesión</a>
             </div>
         </div>
     </nav>
