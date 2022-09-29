@@ -23,7 +23,7 @@
     <h1> Agregue aqui los datos del Empleado</h1>
     <br>
     <!--Crear formulario para llenar los datos del empleado  y guardarlo en el objeto empl -->
-    <form th:action="@{/GuardarEmpleado}" th:object="${empl}" method="post">
+    <form th:action="@{/GuardarEmpleado/{id}(id=${usuario.idEmpleado})}" th:object="${empl}" method="post">
 
         <!--Campo para nombre-->
         <div class="row">

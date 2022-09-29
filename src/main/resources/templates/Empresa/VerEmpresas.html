@@ -65,13 +65,13 @@
         <div class="position-sticky">
             <h1 class="text-center">Menu</h1>
             <div class="list-group list-group-flush mx-3 mt-4">
-                <a th:href="@{/VerEmpleados}"  class="list-group-item list-group-item-action py-2 ripple">
+                <a th:href="@{/VerEmpleados/{id}(id=${usuario.idEmpleado})}"  class="list-group-item list-group-item-action py-2 ripple">
                     <span>Sistema de gestión de empleado</span>
                 </a>
-                <a th:href="@{/VerMovimientos}" class="list-group-item list-group-item-action py-2 ripple">
+                <a th:href="@{/VerMovimientos/{id}(id=${usuario.idEmpleado})}" class="list-group-item list-group-item-action py-2 ripple">
                     <span>Sistema de gestión de ingresos y gastos</span>
                 </a>
-                <a th:href="@{/VerEmpresas}" class="list-group-item list-group-item-action py-2 ripple">
+                <a th:href="@{/VerEmpresas/{id}(id=${usuario.idEmpleado})}" class="list-group-item list-group-item-action py-2 ripple">
                     <span>Sistema de gestión de empresas</span>
                 </a>
             </div>
@@ -79,20 +79,21 @@
     </nav>
 
     <div>
-    <h1> Lista de Empresas</h1>
+        <h1> Lista de Empresas</h1>
+        <h1 th:text='${usuario.rolEmpleado}'></h1>
 
-    <br>
+        <br>
     <!--Dibujamos la tabla-->
-    <br><table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Dirección</th>
-        <th>Telefono</th>
-        <th>NIT</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
-    </tr>
+        <br><table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Telefono</th>
+            <th>NIT</th>
+            <th th:if="${usuario.rolEmpleado==T(co.mintic.mh.moventHandler.entities.Enum_Roles).Admin}">Editar</th>
+            <th th:if="${usuario.rolEmpleado==T(co.mintic.mh.moventHandler.entities.Enum_Roles).Admin}">Eliminar</th>
+        </tr>
 
     <!--Llenamos la tabla dibujada-->
     <!--En nuestro controller, creamos en viewEmpresa un modelo con un atributo llamado emplist donde esta guardada la lista de todas las empresas-->
@@ -102,13 +103,13 @@
         <td th:text="${empresa.direccionEmpresa}"></td>
         <td th:text="${empresa.telefonoEmpresa}"></td>
         <td th:text="${empresa.documentoEmpresa}"></td>
-        <td><a class="btn btn-warning" th:href="@{/EditarEmpresa/{id}(id=${empresa.idEmpresa})}">Editar</a></td>
-        <td><a class="btn btn-danger" th:href="@{/EliminarEmpresa/{id}(id=${empresa.idEmpresa})}">Eliminar</a></td>
+        <td th:if="${usuario.rolEmpleado==T(co.mintic.mh.moventHandler.entities.Enum_Roles).Admin}"><a class="btn btn-warning" th:href="@{'/EditarEmpresa/'+${usuario.idEmpleado}+'/'+${empresa.idEmpresa}}">Editar</a></td>
+        <td th:if="${usuario.rolEmpleado==T(co.mintic.mh.moventHandler.entities.Enum_Roles).Admin}"><a class="btn btn-danger" th:href="@{'/EliminarEmpresa/'+${usuario.idEmpleado}+'/'+${empresa.idEmpresa}}">Eliminar</a></td>
     </tr>
 </table>
 
     <!-- vamos a crear un boton que sirva para agregar nuevas empresas -->
-    <a class="btn btn-info" th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a>
+    <a th:if="${usuario.rolEmpleado==T(co.mintic.mh.moventHandler.entities.Enum_Roles).Admin}" class="btn btn-info" th:href="@{/AgregarEmpresa/{id}(id=${usuario.idEmpleado})}">Agregar Nueva Empresa</a>
 
 </div>
 

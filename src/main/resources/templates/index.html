@@ -56,13 +56,13 @@
         <h1 class="text-center">Menu</h1>
         <h5 class="text-center" th:text="${empleado.correoEmpleado}"></h5>
         <div class="list-group list-group-flush mx-3 mt-4">
-            <a th:href="@{/VerEmpleados}"  class="list-group-item list-group-item-action py-2 ripple">
+            <a th:href="@{/VerEmpleados/{id}(id=${empleado.idEmpleado})}"  class="list-group-item list-group-item-action py-2 ripple">
                 <span>Sistema de gestión de empleado</span>
             </a>
-            <a th:href="@{/VerMovimientos}" class="list-group-item list-group-item-action py-2 ripple">
+            <a th:href="@{/VerMovimientos/{id}(id=${empleado.idEmpleado})}" class="list-group-item list-group-item-action py-2 ripple">
                 <span>Sistema de gestión de ingresos y gastos</span>
             </a>
-            <a th:href="@{/VerEmpresas}" class="list-group-item list-group-item-action py-2 ripple">
+            <a th:href="@{/VerEmpresas/{id}(id=${empleado.idEmpleado})}" class="list-group-item list-group-item-action py-2 ripple">
                 <span>Sistema de gestión de empresas</span>
             </a>
         </div>

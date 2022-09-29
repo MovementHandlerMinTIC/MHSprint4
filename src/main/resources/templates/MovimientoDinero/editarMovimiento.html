@@ -23,7 +23,7 @@
     <h1> Edite aquí los datos de la Transacción</h1>
     <br>
     <!--Crear formulario para llenar los datos del movimiento y guardarlo en el objeto emp -->
-    <form th:action="@{/GuardarMovimiento}" th:object="${mov}" method="post">
+    <form th:action="@{/ActualizarMovimiento/{id}(id=${usuario.idEmpleado})}" th:object="${mov}" method="post">
 
         <!--Campo para id-->
         <div class="row">
@@ -92,7 +92,7 @@
         <!--Boton para enviar todo y ejecutar accion -->
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-success">Agregar Movimiento</button>
+                <button class="btn btn-success">Actualizar Movimiento</button>
             </div>
         </div>
 

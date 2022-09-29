@@ -23,7 +23,7 @@
     <h1> Edite aqui los datos de Empresa</h1>
     <br>
     <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp -->
-    <form th:action="@{/ActualizarEmpresa}" th:object="${emp}" method="post">
+    <form th:action="@{/ActualizarEmpresa/{id}(id=${usuario.IdEmpleado})}" th:object="${emp}" method="post">
 
         <!--Campo para id-->
         <div class="row">

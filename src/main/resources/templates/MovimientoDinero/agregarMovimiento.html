@@ -23,7 +23,7 @@
     <h1> Agregue aquí los datos de la Transacción</h1>
     <br>
     <!--Crear formulario para llenar los datos del movimiento y guardarlo en el objeto emp -->
-    <form th:action="@{/GuardarMovimiento}" th:object="${mov}" method="post">
+    <form th:action="@{/GuardarMovimiento/{id}(id=${usuario.idEmpleado})}" th:object="${mov}" method="post">
         <!--Campo para conceptox-->
         <div class="row">
             <div class="form-group col-md-12">

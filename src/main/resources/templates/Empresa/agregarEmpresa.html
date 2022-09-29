@@ -23,7 +23,7 @@
     <h1> Agregue aqui los datos de Empresa</h1>
     <br>
     <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp -->
-    <form th:action="@{/GuardarEmpresa}" th:object="${empresa}" method="post">
+    <form th:action="@{/GuardarEmpresa/{id}(id=${usuario.idEmpleado})}" th:object="${empresa}" method="post">
         <!--Campo para nombre-->
         <div class="row">
             <div class="form-group col-md-12">
