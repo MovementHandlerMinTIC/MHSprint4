@@ -28,7 +28,7 @@ public class EmpresaController {
         model.addAttribute("emprelis", listaempresas);
         model.addAttribute("mensaje", mensaje);
         model.addAttribute("usuario",usuario.get());
-        return "Empleado/verEmpresas";
+        return "Empresa/verEmpresas";
     }
 
     @GetMapping("/AgregarEmpresa/{id}")
