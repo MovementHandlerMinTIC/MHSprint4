@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class EmpresaController {
@@ -22,11 +23,11 @@ public class EmpresaController {
 
     @GetMapping("/VerEmpresas/{id}")
     public String viewEmpresas (@PathVariable Long id ,Model model,@ModelAttribute("mensaje") String mensaje){
-        Empleado usuario = empleadoService.findById(id).get();
         List<Empresa> listaempresas = empresaService.findAll();
+        Optional<Empleado> usuario = empleadoService.findById(id);
         model.addAttribute("emprelis", listaempresas);
         model.addAttribute("mensaje", mensaje);
-        model.addAttribute("usuario",usuario);
+        model.addAttribute("usuario",usuario.get());
         return "Empresa/verEmpresas";
     }
 
