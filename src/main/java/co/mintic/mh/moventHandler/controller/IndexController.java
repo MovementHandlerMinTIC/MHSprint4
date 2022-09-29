@@ -25,7 +25,6 @@ public class IndexController {
     public String login(Model model,@AuthenticationPrincipal OidcUser principal){
         if (principal  != null) {
             Empleado empleado = empleadoService.getOrCreateEmpleado(principal.getClaims());
-            System.out.println(empleado);
             model.addAttribute("empleado",empleado);
         }
         return "login";

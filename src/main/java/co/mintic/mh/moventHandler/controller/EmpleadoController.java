@@ -57,6 +57,7 @@ public class EmpleadoController {
     @PostMapping("/GuardarEmpleado/{id}")
     public String guardarEmpleado(@PathVariable Long id,Empleado emp, RedirectAttributes redirectAttributes) {
         //Empleado usuario = empleadoService.findById(id).get();
+        System.out.println("datos"+emp);
         if (empleadoService.createEmpleado(emp)){
             redirectAttributes.addFlashAttribute("mensaje", "saveOK");
             return "redirect:/VerEmpleados/"+id;

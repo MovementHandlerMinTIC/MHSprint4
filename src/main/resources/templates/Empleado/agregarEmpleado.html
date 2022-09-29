@@ -49,8 +49,8 @@
                 <label class="col-md-3" for="empresaEmpleado">Empresa a la que pertenece:</label>
                 <div class="col-md-6">
                    <!-- <input type="text" th:field="*{empresaEmpleado}" class="form-control" id="empresaEmpleado" required="required"> -->
-                    <select th:field="*{empresaEmpleado.idEmpresa}" name="empresaEmpleado" class="form-control" id="empresaEmpleado">
-                        <option  value="0" selected>Seleccione Empresa</option>
+                    <select th:field="*{empresaEmpleado.idEmpresa}" name="empresaEmpleado" class="form-control" id="empresaEmpleado" required>
+                        <option value="0" hidden>Selecciona la empresa </option>
                         <option th:each="empresa : ${emprelist}"
                                 th:value="${empresa.idEmpresa}"
                                 th:text="${empresa.nombreEmpresa}">
@@ -65,8 +65,8 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="rolEmpleado">Rol del Empleado:</label>
                 <div class="col-md-6">
-                    <select th:field="*{rolEmpleado}" name="rolEmpleado" id="rolEmpleado" class="form-control">
-                        <option  value="0" selected>Seleccione el rol</option>
+                    <select th:field="*{rolEmpleado}" name="rolEmpleado" id="rolEmpleado" class="form-control" required>
+                        <option value="0" hidden>Selecciona el rol </option>
                         <option th:each="rol : ${T(co.mintic.mh.moventHandler.entities.Enum_Roles).values()}"
                                 th:value="${rol}"
                                 th:text="${rol}">
